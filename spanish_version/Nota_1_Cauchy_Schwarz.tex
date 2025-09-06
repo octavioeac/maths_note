@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, geometry}
+\geometry{margin=2.5cm}
+
+\title{Apuntes: Cauchy--Schwarz, Formas Cuadráticas y Proyección Ortogonal}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{1. La forma cuadrática asociada}
+Sea $(H,\langle \cdot,\cdot\rangle)$ un espacio de Hilbert. 
+Para $f,g \in H$ definimos
+\[
+Q(\lambda) \;=\; \|f - \lambda g\|^2, \qquad \lambda \in \mathbb{C}.
+\]
+
+\noindent
+Expandiendo con el producto interno:
+\[
+Q(\lambda) \;=\; \|f\|^2 - 2\Re\!\big(\lambda \langle f,g\rangle\big) + |\lambda|^2 \|g\|^2.
+\]
+
+Es decir, $Q(\lambda)$ es una \emph{parábola} en la variable $\lambda$.
+
+\section*{2. Optimización}
+Como $Q(\lambda) \geq 0$ para todo $\lambda$, el valor mínimo se alcanza en
+\[
+\lambda^* \;=\; \frac{\langle f,g\rangle}{\|g\|^2}.
+\]
+
+\noindent
+Sustituyendo:
+\[
+Q(\lambda^*) \;=\; \|f\|^2 - \frac{|\langle f,g\rangle|^2}{\|g\|^2}.
+\]
+
+\section*{3. Desigualdad de Cauchy--Schwarz}
+De la positividad se sigue:
+\[
+Q(\lambda^*) \;\geq\; 0 
+\quad \Longrightarrow \quad
+|\langle f,g\rangle|^2 \;\leq\; \|f\|^2 \, \|g\|^2.
+\]
+
+\noindent
+Esto es precisamente la \textbf{desigualdad de Cauchy--Schwarz}.
+
+\section*{4. Interpretación geométrica}
+\begin{itemize}
+  \item $Q(\lambda)$ representa la \textbf{distancia al cuadrado} entre $f$ y el subespacio generado por $g$:
+  \[
+  Q(\lambda) = \|f - \lambda g\|^2.
+  \]
+  \item El mínimo $Q(\lambda^*)$ corresponde a la \textbf{distancia ortogonal} de $f$ al subespacio $\text{span}\{g\}$.
+  \item El vector proyectado es
+  \[
+  P_g(f) = \lambda^* g = \frac{\langle f,g\rangle}{\|g\|^2}\, g.
+  \]
+  \item El residuo $f - P_g(f)$ es ortogonal a $g$:
+  \[
+  \langle f - P_g(f), \, g \rangle = 0.
+  \]
+\end{itemize}
+
+\section*{5. Continuidad}
+La función $Q(\lambda)$ es cuadrática y por tanto continua en $\lambda$. 
+Esto garantiza que el paso al mínimo no requiere argumentos de límite $\varepsilon$--$\delta$, 
+sino que la geometría misma del espacio de Hilbert asegura la continuidad y la convergencia.
+
+
+\section*{6. Aplicaciones en Machine Learning}
+
+La desigualdad de Cauchy--Schwarz y la interpretación de la forma cuadrática 
+aparecen en múltiples áreas de Machine Learning:
+
+\subsection*{6.1 Similitud de coseno}
+Para embeddings $x,y \in \mathbb{R}^n$, se define
+\[
+\cos(\theta) = \frac{\langle x,y\rangle}{\|x\|\|y\|}.
+\]
+Cauchy--Schwarz garantiza que $-1 \leq \cos(\theta) \leq 1$, 
+haciendo válida la noción de similitud usada en NLP, visión y sistemas de recomendación.
+
+\subsection*{6.2 Regularización y estabilidad}
+En problemas de optimización se minimiza
+\[
+\min_w L(w) + \lambda \|w\|^2,
+\]
+donde la norma proviene de un producto interno. 
+Cauchy--Schwarz asegura continuidad y estabilidad de los algoritmos de gradiente.
+
+\subsection*{6.3 Kernels y SVMs}
+Si $K(x,y)$ es un kernel en un espacio de Hilbert reproducing (RKHS),
+\[
+|K(x,y)| \leq \sqrt{K(x,x)} \, \sqrt{K(y,y)}.
+\]
+Esto valida el kernel como medida de similitud y sustenta métodos como SVMs y Gaussian Processes.
+
+\subsection*{6.4 Acotación de errores}
+Para variables aleatorias $X,Y$,
+\[
+|\mathbb{E}[XY]| \leq \sqrt{\mathbb{E}[X^2]} \, \sqrt{\mathbb{E}[Y^2]}.
+\]
+Este bound se usa en análisis de varianza, consistencia de estimadores 
+y teoría de generalización (PAC learning).
+
+\subsection*{6.5 Gradiente y optimización}
+En descenso de gradiente,
+\[
+|\langle \nabla f(w), d\rangle| \leq \|\nabla f(w)\| \cdot \|d\|.
+\]
+Esto garantiza que el gradiente actúa como un funcional lineal continuo 
+y que el paso en dirección $d$ está controlado.
+
+\subsection*{6.6 PCA y reducción de dimensionalidad}
+En PCA se maximiza
+\[
+\max_{\|v\|=1} v^T \Sigma v,
+\]
+donde $\Sigma$ es la matriz de covarianza. 
+El máximo se alcanza en un autovector principal gracias a Cauchy--Schwarz, 
+lo que fundamenta la reducción de dimensionalidad.
+
+\bigskip
+\noindent
+\textbf{Conclusión:}  
+La desigualdad de Cauchy--Schwarz puede verse como la afirmación de que la parábola
+\[
+Q(\lambda) = \|f - \lambda g\|^2
+\]
+\textbf{nunca desciende bajo el eje horizontal}.  
+De esta manera, Cauchy--Schwarz no sólo es una desigualdad algebraica, 
+sino también una expresión de la \emph{continuidad geométrica} de la proyección ortogonal.
+
+\end{document}

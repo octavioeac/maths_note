@@ -1,0 +1,25 @@
+# Archivos auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Carpetas de build
+build/
+pdf/*.synctex.gz
+pdf/*.aux
+pdf/*.log
+
+# Opcional: no subir PDFs generados
+# pdf/*.pdf
+
+# Respaldo y editores
+*.bak
+*~
+.vscode/
+.idea/
