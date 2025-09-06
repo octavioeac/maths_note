@@ -10,10 +10,9 @@
 *.synctex.gz
 
 # Carpetas de build
-build/
-pdf/*.synctex.gz
-pdf/*.aux
-pdf/*.log
+build/*.synctex.gz
+build/*.aux
+build/*.log
 
 # Opcional: no subir PDFs generados
 # pdf/*.pdf
